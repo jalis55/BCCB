@@ -88,13 +88,54 @@ class PlayerController extends Controller
     public function player_detail($id){
     	 ini_set('memory_limit','256M');
     	$player_info=DB::table('players')->where('player_id',$id)->first();
-    	$edu_info=DB::table('educations')->where('player_id',$id)->first();
-    	$prev_info=DB::table('previous_histories')->where('player_id',$id)->first();
+    	$data['edu_info']=DB::table('educations')->where('player_id',$id)->orderBy('year','desc')->get();
+    	$data['prev_info']=DB::table('previous_histories')->where('player_id',$id)->get();
     	$performence=DB::table('best_performances')->where('player_id',$id)->first();
 		$t_address=json_decode($player_info->present_address);
 		$p_address=json_decode($player_info->parmanent_address);
 		
-    	return view('home_pages.players_details')->with('data',$player_info)->with('t_add',$t_address)
-    	->with('p_add',$p_address);
+    	return view('home_pages.players_details')->with('player_data',$player_info)->with('t_add',$t_address)
+    	->with('p_add',$p_address)->with('perform',$performence)->with('data',$data);
     }
+    public function player_login()
+    {
+    	return view('home_pages.player_login');
+    }
+    public function player_login_check(Request $request)
+    {
+    	$this->auth_check();
+    	$email=$request->email;
+    	$password=$request->password;
+    	$result=DB::table('players')
+    	       ->select('*')
+    	       ->where('email','=',$email)
+    	       ->where('password','=',md5($password))
+    	       ->first();
+
+
+    	if($result)
+    	{
+    		session::put('player_id',$result->player_id);
+    		//session::put('admin_name',$result->admin_name);
+    		return redirect::to('home_pages.player_dashboard');
+
+    	}
+    	else
+    	{
+
+    		session::flash('message','invalid email or password');
+    		return redirect::to('player-login');
+    	}
+    }
+    public function auth_check()
+    {
+        session_start();
+        $player_id=session::get('player_id');
+        if($player_id !=NULL)
+         {
+            return redirect::to('player-login')->send();
+         }   
+       
+    }
+
 }

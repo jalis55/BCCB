@@ -46,11 +46,21 @@
                   <div class="top-nav">
                      <span class="menu"> </span>
                      <ul>
-                        <li class="active" ><a href="index.html" class="scroll">Home</a></li>
+                        
+                        <li class="{{ (\Request::route()->getName() == 'BCCB') ? 'active' : '' }}" >
+                           <a href="{{url('/')}}" class="scroll">Home</a>
+                        </li>
                         <li><a href="about.html" class="scroll"> About</a></li>
                         <li><a href="teams.html" class="scroll">Team</a></li>
-                        <li><a href="{{url('players')}}" class="scroll">player</a></li>
-                        <li><a href="{{url('player-registration')}}" class="scroll">Register</a></li>
+                        <li class="{{ (\Request::route()->getName() == 'Players') ? 'active' : '' }}">
+                           <a href="{{url('players')}}" class="scroll">Players</a>
+                        </li>
+                        <li class="{{ (\Request::route()->getName() == 'Player registration') ? 'active' : '' }}">
+                           <a href="{{url('player-registration')}}" class="scroll">Register</a>
+                        </li>
+                        <li class="{{ (\Request::route()->getName() == 'Player login') ? 'active' : '' }}">
+                           <a href="{{url('player-login')}}" class="scroll">Player Login</a>
+                        </li>
                      </ul>
                      <!--script-->
                      <script>
@@ -68,13 +78,6 @@
       {{-- content --}}
       @yield('home_content')
       <!--footer-->
-      <div class="footer fixed-bottom">
-         <div class="container">
-            <div class="foter-bottom">
-               <p class="footer-grid">Design by <a href="" target="_blank">Team Prime</a> </p>
-               <div class="clearfix"> </div>
-            </div>
-         </div>
-      </div>
+      
    </body>
 </html>

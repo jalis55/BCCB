@@ -13,7 +13,9 @@
 
 
 Route::get('/','HomePageController@index')->name('BCCB');
-Route::get('/player-registration','HomePageController@player_registration')->name('player registration');
+Route::get('/player-registration','HomePageController@player_registration')->name('Player registration');
 Route::post('/player-data','PlayerController@index');
-Route::get('/players','PlayerController@players');
-Route::get('/pleyer-details/{id}','PlayerController@player_detail');
+Route::get('/players','PlayerController@players')->name('Players');
+Route::get('/player-details/{id}','PlayerController@player_detail');
+Route::get('/player-login','PlayerController@player_login')->name('Player login');
+Route::post('/player-login-check','PlayerController@player_login_check');
