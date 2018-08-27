@@ -49,7 +49,7 @@ class PlayerController extends Controller
 			$player=DB::table('players')->where('email',$request->email)->first();
 			$player_id=$player->player_id;
 			
-			
+			//education information
 			$edu['degree_name']=$request->degree_name;
 			$edu['inst_name']=$request->inst_name;
 			$edu['board']=$request->board;
@@ -103,7 +103,7 @@ class PlayerController extends Controller
     }
     public function player_login_check(Request $request)
     {
-    	$this->auth_check();
+    	$this->authCheck();
     	$email=$request->email;
     	$password=$request->password;
     	$result=DB::table('players')
@@ -117,7 +117,7 @@ class PlayerController extends Controller
     	{
     		session::put('player_id',$result->player_id);
     		//session::put('admin_name',$result->admin_name);
-    		return redirect::to('home_pages.player_dashboard');
+    		return redirect::to('player-dashboard');
 
     	}
     	else
@@ -127,7 +127,60 @@ class PlayerController extends Controller
     		return redirect::to('player-login');
     	}
     }
+    public function player_dashboard()
+    {
+    	$this->auth_check();
+    	$player_id=session::get('player_id');
+    	return view('home_pages.player_dashboard')->with('player_id',$player_id);
+
+    }
+    public function add_education(Request $request)
+    {
+    		//education information
+    	echo $request->player_id;
+    	die();
+			$edu['degree_name']=$request->degree_name;
+			$edu['inst_name']=$request->inst_name;
+			$edu['board']=$request->board;
+			$edu['year']=$request->year;
+			$edu['result']=$request->result;
+			$edu['player_id']=$request->player_id;
+			DB::table('educations')->insert($edu);
+
+    }
+    public function add_history(Request $request)
+    {
+
+			//previous history    	
+    		$his['p_clubName']=$request->p_clubName;
+			$his['from']=$request->from;
+			$his['to']=$request->to;
+			$his['total_run']=$request->total_run;
+			$his['total_wicket']=$request->total_wicket;
+			$his['team_leader']=$request->team_leader;
+			$his['player_id']=$request->player_id;
+			DB::table('previous_histories')->insert($his);
+			Session::flash('message','Data added successfuly');
+			return Redirect::to('/player-dashboard');
+
+    }
+    public function player_logout()
+    {
+        Session::flash('player_id','');
+        Session::flash('message','you have logged out successfully');
+        return redirect::to('player-login');
+    }
     public function auth_check()
+    {
+        session_start();
+        $player_id=session::get('player_id');
+        if($player_id ==NULL)
+         {
+            return redirect::to('player-login')->send();
+         }   
+       
+    }
+    public function authCheck()
     {
         session_start();
         $player_id=session::get('player_id');

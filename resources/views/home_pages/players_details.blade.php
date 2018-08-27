@@ -105,38 +105,7 @@
 
                </table>
            </div>
-           <div class="bg-success">
-               <h3>Previous History</h3>
-              <table class="table table-bordered">
-                <thead>
-                  <tr>
-                    <th>Club Name</th>
-                    <th>From-To</th>
-                    <th>Total Runs</th>
-                    <th>Total Wickets</th>
-                    <th>Captain</th>
-                  </tr>
-                 </thead>
-                <tbody>
-                    
-                @foreach($data['prev_info'] as $row)
-                  <tr>
-                    <td>{{$row->p_clubName}}</td>
-                    <td>{{$row->from}}-{{$row->to}}</td>
-                    <td>{{$row->total_run}}</td>
-                    <td>{{$row->    total_wicket}}</td>
-                    <td>
-                        @if($row->team_leader==0)
-                         NO
-                        @else
-                         YES
-                        @endif
-                    </td>
-                  </tr>
-                @endforeach
-                </tbody>
-               </table>
-           </div>
+
            <div class="bg-success">    
                <h3>Best Performance</h3>
               <table class="table table-bordered">

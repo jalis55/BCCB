@@ -46,40 +46,40 @@
                     Present address
                     <div class="form-inline">
                         <div class="form-group">
-                            <input required type="text" na requiredme="t_houseNO" class="form-control input-sm" id="t_houseNO" placeholder="house no">
+                            <input required type="text" name="t_houseNO" class="form-control input-sm" id="t_houseNO" placeholder="house no">
                         </div>
                         <div class="form-group">
-                            <input required type="text" name="t_locat requiredion" class="form-control input-sm" id="t_location" placeholder="location ">
-                        </div>
-                    </div>
-                    <div class="form-inline">
-                        <div class="form-group">
-                            <input required type="text" name="t_ requiredvillage" class="form-control input-sm" id="t_village" placeholder="village/street">
-                        </div>
-                        <div class="form-group">
-                            <input required type="tex requiredt" name="t_thana" class="form-control input-sm" id="t_thana" placeholder="thana">
+                            <input required type="text" name="t_location" class="form-control input-sm" id="t_location" placeholder="location ">
                         </div>
                     </div>
                     <div class="form-inline">
                         <div class="form-group">
-                            <input required type="text" name="t_dist requiredrict" class="form-control input-sm" id="t_district" placeholder="district">
+                            <input required type="text" name="t_village" class="form-control input-sm" id="t_village" placeholder="village/street">
                         </div>
                         <div class="form-group">
-                            <input required type="text" name="t_postC requiredode" class="form-control input-sm" id="t_postCode" placeholder="post code">
+                            <input required type="text" name="t_thana" class="form-control input-sm" id="t_thana" placeholder="thana">
+                        </div>
+                    </div>
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <input required type="text" name="t_district" class="form-control input-sm" id="t_district" placeholder="district">
+                        </div>
+                        <div class="form-group">
+                            <input required type="text" name="t_postCode" class="form-control input-sm" id="t_postCode" placeholder="post code">
                         </div>
                     </div>
                     <br> Parmanent address
                     <div class="form-inline">
                         <div class="form-group form-inline">
-                            <input required type="text" na requiredme="p_houseNO" class="form-control input-sm" id="p_houseNO" placeholder="house no">
+                            <input required type="text" name="p_houseNO" class="form-control input-sm" id="p_houseNO" placeholder="house no">
                         </div>
                         <div class="form-group">
-                            <input required type="text" name="p_loca requiredtion" class="form-control input-sm" id="p_location" placeholder="location">
+                            <input required type="text" name="p_location" class="form-control input-sm" id="p_location" placeholder="location">
                         </div>
                     </div>
                     <div class="form-inline">
                         <div class="form-group">
-                            <input required type="text" name="p_ requiredvillage" class="form-control input-sm" id="p_village" placeholder="village/street">
+                            <input required type="text" name="p_village" class="form-control input-sm" id="p_village" placeholder="village/street">
                         </div>
                         <div class="form-group">
                             <input required type="tex requiredt" name="p_thana" class="form-control input-sm" id="p_thana" placeholder="thana">
@@ -87,15 +87,15 @@
                     </div>
                     <div class="form-inline">
                         <div class="form-group">
-                            <input required type="text" name="p_dist requiredrict" class="form-control input-sm" id="p_district" placeholder="district">
+                            <input required type="text" name="p_district" class="form-control input-sm" id="p_district" placeholder="district">
                         </div>
                         <div class="form-group">
-                            <input required type="text" name="p_postC requiredode" class="form-control input-sm" id="p_postCode" placeholder="post code">
+                            <input required type="text" name="p_postCode" class="form-control input-sm" id="p_postCode" placeholder="post code">
                         </div>
                     </div>
                     Educational Qualifications
                     <div class="form-group">
-                        <input required type="text" name= required"degree_name" class="form-control input-sm" id="degree_name" placeholder="Degree Name">
+                        <input required type="text" name="degree_name" class="form-control input-sm" id="degree_name" placeholder="Degree Name">
                     </div>
                     <div class="form-inline">
                         <tr>
@@ -106,19 +106,19 @@
                             </td>
                             <td>
                                 <div class="form-group">
-                                    <input required type="text" name="boar requiredd" class="form-control input-sm" id="board" placeholder="Board/University">
+                                    <input required type="text" name="board" class="form-control input-sm" id="board" placeholder="Board/University">
                                 </div>
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <div class="form-group">
-                                    <input required type="te requiredxt" name="year" class="form-control input-sm" id="year" placeholder="Year">
+                                    <input required type="text" name="year" class="form-control input-sm" id="year" placeholder="Year">
                                 </div>
                             </td>
                             <td>
                                 <div class="form-group">
-                                    <input required type="text" name=" requiredresult" class="form-control input-sm" id="result" placeholder="Result">
+                                    <input required type="text" name="result" class="form-control input-sm" id="result" placeholder="Result">
                                 </div>
                             </td>
                         </tr>
@@ -150,12 +150,12 @@
                     Best Performance
                     <div class="form-group">
 
-                        <input required type="text" n requiredame="b_clubName" class="form-control input-sm" id="b_clubName" placeholder="Club Name">
+                        <input required type="text" ndame="b_clubName" class="form-control input-sm" id="b_clubName" placeholder="Club Name">
                         <input required type="text" name="b_opClubName" class="form-control input-sm" id="b_opClubName" placeholder="Oppnent Club Name">
-                        <input required type="text"  requiredname="b_eventId" class="form-control input-sm" id="b_eventId" placeholder="Event Id">
-                        <input required type="text"  requiredname="b_matchId" class="form-control input-sm" id="b_matchId" placeholder="Match Id">
+                        <input required type="text"  name="b_eventId" class="form-control input-sm" id="b_eventId" placeholder="Event Id">
+                        <input required type="text"  name="b_matchId" class="form-control input-sm" id="b_matchId" placeholder="Match Id">
                         <input required type="te requiredxt" name="b_runs" class="form-control input-sm" id="b_runs" placeholder="Runs">
-                        <input required type="text" required name="b_wickets" class="form-control input-sm" id="b_wickets" placeholder="Wickets">
+                        <input required type="text" name="b_wickets" class="form-control input-sm" id="b_wickets" placeholder="Wickets">
 
                     </div>
 

@@ -19,3 +19,7 @@ Route::get('/players','PlayerController@players')->name('Players');
 Route::get('/player-details/{id}','PlayerController@player_detail');
 Route::get('/player-login','PlayerController@player_login')->name('Player login');
 Route::post('/player-login-check','PlayerController@player_login_check');
+Route::get('/player-dashboard','PlayerController@player_dashboard');
+Route::post('/add-education','PlayerController@add_education');
+Route::post('/add-history','PlayerController@add_history');
+Route::get('player-logout','PlayerController@player_logout');

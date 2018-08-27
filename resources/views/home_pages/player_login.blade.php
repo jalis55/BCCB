@@ -21,7 +21,7 @@
 				    $(function(){
 				        setTimeout(function() {
 				            $('.fade-message').slideUp();
-				        }, 5000);
+				        }, 3000);
 				       });
 				    </script>
        				 @endif
