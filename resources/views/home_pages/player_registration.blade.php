@@ -16,7 +16,7 @@
     </script>
         @endif
         <h2>Player Registration form</h2></hr>
-        <form action="{{url('player-data')}}" method="post">
+        <form action="{{url('player-data')}}" method="post" enctype="multipart/form-data">
            {{csrf_field()}}
             <div class="row">
                 <div class="col-md-3">
@@ -39,6 +39,12 @@
                     Date of birth:
                     <div class="form-group">
                        <input type="date" name="dob" class="form-control" id="dob">
+                    </div>
+                    <div class="form-group">
+                        upload signature with date
+                        <input type="file" name="player_sign" class="form-control" id="player_sign" placeholder="player signature" required>
+
+
                     </div>
 
                 </div>
@@ -150,7 +156,7 @@
                     Best Performance
                     <div class="form-group">
 
-                        <input required type="text" ndame="b_clubName" class="form-control input-sm" id="b_clubName" placeholder="Club Name">
+                        <input required type="text" name="b_clubName" class="form-control input-sm" id="b_clubName" placeholder="Club Name">
                         <input required type="text" name="b_opClubName" class="form-control input-sm" id="b_opClubName" placeholder="Oppnent Club Name">
                         <input required type="text"  name="b_eventId" class="form-control input-sm" id="b_eventId" placeholder="Event Id">
                         <input required type="text"  name="b_matchId" class="form-control input-sm" id="b_matchId" placeholder="Match Id">
@@ -164,20 +170,24 @@
 
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Membership select</label>
-                        <select name="membership" class="form-control" id="exampleFormControlSelect1">
+                        <select name="membership" class="form-control" id="membership">
                             <option value="0">--</option>
                             <option value="iccb">ICCB</option>
                             <option value="bccb">BCCB</option>
                             <option value="accb">ACCB</option>
                             <option value="others">others</option>
                         </select>
+                            <div id="add_fields_placeholderValue">
+                             <input type="text" name="membership" class="form-control" id="add_fields_placeholderValue">
+                            </div>
                     </div>
-                    <div class="form-group">
-                        <input required type="text" name="player_sign" class="form-control" id="player_sign" placeholder="player signature">
-                        <input required type="text" name="signature_date" class="form-control" id="signature_date" placeholder="date">
 
-                    </div>
+
+
                     <div class="form-group">
+                        upload image
+                        <input type="file" name="image" class="form-control" placeholder="upload image" >
+                        <br>
                         <input required type="text" name="email" class="form-control" id="player_sign" placeholder="enter email">
                         <input required type="password" name="password" class="form-control" id="password" placeholder="enter password">
                         <input required type="password" name="password2" class="form-control" id="password2" placeholder="re-enter password">
@@ -208,4 +218,22 @@
                 $("#validate-status").html("not match").css("color","red").addClass("alert alert-danger");}
              }
     </script>
+        <script type="text/javascript">
+            $(document).ready(function()
+                  {
+                  $("#membership").change(function()
+        {
+            if($(this).val() == "others")
+        {
+            $("#add_fields_placeholderValue").show();
+        }
+        else
+        {
+            $("#add_fields_placeholderValue").hide();
+        }
+            });
+                      $("#add_fields_placeholderValue").hide();
+            });
+        
+        </script>
     @endsection

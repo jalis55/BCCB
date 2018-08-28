@@ -23,3 +23,16 @@ Route::get('/player-dashboard','PlayerController@player_dashboard');
 Route::post('/add-education','PlayerController@add_education');
 Route::post('/add-history','PlayerController@add_history');
 Route::get('player-logout','PlayerController@player_logout');
+
+Route::get('/clear-cache', function() {
+    $exitCode = Artisan::call('cache:clear');
+    // return what you want
+});
+Route::get('/config-cache', function() {
+    $exitCode = Artisan::call('config:cache');
+    return '<h1>Clear Config cleared</h1>';
+});
+Route::get('/view-clear', function() {
+    $exitCode = Artisan::call('view:clear');
+    return '<h1>View cache cleared</h1>';
+});

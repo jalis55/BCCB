@@ -8,8 +8,11 @@
     <div class="well" style="background: #ccffe6">
      <div class="row centered">
       <div class="col-sm-4 col-md-4 col-md-offset-4">
-                
-        <img src="{{asset('public/images/images.png')}}" class="img-thumbnail" alt="Cinque Terre" width="150" height="100"> 
+        @if($player_data->image==null)        
+        <img src="{{asset('public/images/images.png')}}" class="img-thumbnail" alt="Cinque Terre" width="150" height="100">
+        @else 
+        <img src="{{$player_data->image}}">
+        @endif
             
          <h2 class="capi">{{$player_data->f_name}} {{$player_data->m_name}} {{$player_data->l_name}}</h2>
       </div>

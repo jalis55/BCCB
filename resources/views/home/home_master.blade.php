@@ -50,8 +50,8 @@
                         <li class="{{ (\Request::route()->getName() == 'BCCB') ? 'active' : '' }}" >
                            <a href="{{url('/')}}" class="scroll">Home</a>
                         </li>
-                        <li><a href="about.html" class="scroll"> About</a></li>
-                        <li><a href="teams.html" class="scroll">Team</a></li>
+                        {{-- <li><a href="about.html" class="scroll"> About</a></li> --}}
+                        {{-- <li><a href="teams.html" class="scroll">Team</a></li> --}}
                         <li class="{{ (\Request::route()->getName() == 'Players') ? 'active' : '' }}">
                            <a href="{{url('players')}}" class="scroll">Players</a>
                         </li>

@@ -81,8 +81,10 @@
 
       </div>
       <div class="modal-body">
-        <form action="">
+        <form action="{{url('/add-education')}}" method="post">
+        	{{csrf_field()}}
         	                    <div class="form-group">
+        	                    	<input type="hidden" name="player_id" value="{{$player_id}}">
                         <input required type="text" name="degree_name" class="form-control input-sm" id="degree_name" placeholder="Degree Name">
                     </div>
                     
@@ -119,64 +121,8 @@
     </div>
 
   </div>
-</div>		<!--Education Modal -->
-<div id="edu" class="modal fade" role="dialog">
-  <div class="modal-dialog">
+</div>	
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Educational Information</h4>
-
-      </div>
-      <div class="modal-body">
-        <form action="{{url('/add-education')}}" method="post">
-        	{{csrf_field()}}
-        	<input type="text" name="player_id" value="{{$player_id}}">
-        	                    <div class="form-group">
-
-                        <input required type="text" name="degree_name" class="form-control input-sm" id="degree_name" placeholder="Degree Name">
-                    </div>
-                    
-                        
-                                <div class="form-group">
-                                    <input required type="text" name="inst_name" class="form-control input-sm" id="inst_name" placeholder="Institute/Department">
-                                </div>
-                                <div class="form-group">
-                                    <input required type="text" name="inst_name" class="form-control input-sm" id="inst_name" placeholder="Institute/Department">
-                                </div>
-                         
-                                <div class="form-group">
-                                    <input required type="text" name="board" class="form-control input-sm" id="board" placeholder="Board/University">
-                                </div>
-                            
-                        
-                        
-                            
-                                <div class="form-group">
-                                    <input required type="text" name="year" class="form-control input-sm" id="year" placeholder="Year">
-                                </div>
-                            	
-                                <div class="form-group">
-                                    <input required type="text" name="result" class="form-control input-sm" id="result" placeholder="Result">
-
-                                </div>
-                                <div class="form-group">
-                                    <input type="submit" class="btn btn-success btn-block">
-                                </div>
-                          
-
-                    
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-
-  </div>
-</div>
 		<!--History Modal -->
 <div id="history" class="modal fade" role="dialog">
   <div class="modal-dialog">

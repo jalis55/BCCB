@@ -7,7 +7,11 @@
             <div class="col-sm-3">
 
                 <div class="card" style="width:120px">
-                    <img class="card-img-top" src="{{asset('public/images/images.png')}}" alt="Card image" style="width:100%">
+                           @if($row->image==null)        
+        <img src="{{asset('public/images/images.png')}}" class="img-thumbnail" alt="Cinque Terre" width="150" height="100">
+        @else 
+        <img src="{{$row->image}}" class="img-thumbnail" alt="Cinque Terre" width="150" height="100">
+        @endif
                   <div class="card-body">
                     <h4 class="card-title">{{$row->f_name}} {{$row->m_name}} {{$row->l_name}}</h4>
                     <h5><b>Age:</b>

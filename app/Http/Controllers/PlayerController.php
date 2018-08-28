@@ -10,8 +10,36 @@ use Session;
 
 class PlayerController extends Controller
 {
+	    public function upload_image($image)
+    {
+    	//die("function working");
+    	       
+		            $image_name=str_random(20);
+		            $ext=strtolower($image->getClientOriginalExtension());
+		            $image_full_name=$image_name.'.'.$ext;
+		            $upload_path=('public/images/');
+		            $image_url=$upload_path.$image_full_name;
+		            $success=$image->move($upload_path,$image_full_name);
+		            if($success)
+		            {
+		            	
+		            	return $image_url;
+		            }
+	
+
+    }
     public function index(Request $request)
     {
+
+    	$email=DB::table('players')->select('email')->where('email','=',$request->email)->first();
+    	if($email==true)
+    	{
+    		Session::flash('message','Email has already exists');
+    		return redirect::to('player-registration')->send();
+    	}
+
+
+
     	$data=array();
 			$data['f_name']=$request->f_name;
 			$data['m_name']=$request->m_name;
@@ -41,10 +69,22 @@ class PlayerController extends Controller
 			$data['parmanent_address']=json_encode($addr1);
 			$data['email']=$request->email;
 			$data['password']=md5('$request->password');
-			$data['player_sign']=$request->player_sign;
-			$data['signature_date']=$request->signature_date;
+			$sign=$request->file('player_sign');
+			// $data['signature_date']=$request->signature_date;
 			$data['membership']=$request->membership;
-			DB::table('players')->insert($data);//player information
+			$image=$request->file('image');
+			$data['created_at']=date("Y-m-d H:i:s");
+			if($image && $sign)
+			{
+				$data['image']=$this->upload_image($image);
+				$data['player_sign']=$this->upload_image($sign);
+				DB::table('players')->insert($data);//player information
+			}
+			else{
+				DB::table('players')->insert($data);//player information
+				
+			}
+
 
 			$player=DB::table('players')->where('email',$request->email)->first();
 			$player_id=$player->player_id;
@@ -137,8 +177,7 @@ class PlayerController extends Controller
     public function add_education(Request $request)
     {
     		//education information
-    	echo $request->player_id;
-    	die();
+   
 			$edu['degree_name']=$request->degree_name;
 			$edu['inst_name']=$request->inst_name;
 			$edu['board']=$request->board;
@@ -146,6 +185,8 @@ class PlayerController extends Controller
 			$edu['result']=$request->result;
 			$edu['player_id']=$request->player_id;
 			DB::table('educations')->insert($edu);
+			Session::flash('message','Data added successfuly');
+			return Redirect::to('/player-dashboard');
 
     }
     public function add_history(Request $request)
@@ -170,6 +211,7 @@ class PlayerController extends Controller
         Session::flash('message','you have logged out successfully');
         return redirect::to('player-login');
     }
+
     public function auth_check()
     {
         session_start();
