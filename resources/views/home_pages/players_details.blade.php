@@ -15,6 +15,7 @@
         @endif
             
          <h2 class="capi">{{$player_data->f_name}} {{$player_data->m_name}} {{$player_data->l_name}}</h2>
+         <a href="{{url('contract')}}/{{$player_data->player_id}}" class="btn btn-primary">contract</a>
       </div>
      </div><hr>
      <div class="row">

@@ -23,6 +23,18 @@ Route::get('/player-dashboard','PlayerController@player_dashboard');
 Route::post('/add-education','PlayerController@add_education');
 Route::post('/add-history','PlayerController@add_history');
 Route::get('player-logout','PlayerController@player_logout');
+//clubs
+Route::get('/clubs','ClubController@index');
+Route::post('/club-data','ClubController@register_club');
+Route::get('club-login','ClubController@club_login');
+Route::post('club-login-check','ClubController@club_login_check');
+Route::get('club-dashboard','ClubController@club_dashboard');
+Route::get('club-logout','ClubController@club_logout');
+
+//contract
+Route::get('contract/{id}','ClubController@contract');
+Route::post('contract-data','ClubController@contract_data');
+
 
 Route::get('/clear-cache', function() {
     $exitCode = Artisan::call('cache:clear');

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 28, 2018 at 08:27 PM
+-- Generation Time: Aug 29, 2018 at 01:33 PM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 7.1.7
 
@@ -49,6 +49,65 @@ INSERT INTO `best_performances` (`perform_id`, `b_clubName`, `b_opClubName`, `b_
 (1, '1', 'ff', 1, 1, '2', '2', 1, NULL, NULL),
 (2, 'r', 'e', 1, 1, '12', '44', 6, NULL, NULL),
 (3, 'Crowland crows', 'Kaunia oxes', 23, 23, '197', '7', 1, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `clubs`
+--
+
+CREATE TABLE `clubs` (
+  `club_id` int(20) NOT NULL,
+  `club_name` varchar(20) NOT NULL,
+  `date_of_establishment` date NOT NULL,
+  `club_house` varchar(20) NOT NULL,
+  `club_location` varchar(20) NOT NULL,
+  `club_village` varchar(20) NOT NULL,
+  `club_thana` varchar(20) NOT NULL,
+  `club_district` varchar(20) NOT NULL,
+  `club_postcode` varchar(20) NOT NULL,
+  `president` varchar(20) NOT NULL,
+  `password` varchar(60) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `clubs`
+--
+
+INSERT INTO `clubs` (`club_id`, `club_name`, `date_of_establishment`, `club_house`, `club_location`, `club_village`, `club_thana`, `club_district`, `club_postcode`, `president`, `password`) VALUES
+(1, 'sas', '2018-08-29', 'asa', 'sasa', 'sas', 'sas', 'asa', 'sasa', 'ffff', ''),
+(2, 'rrr', '2018-08-29', 'rrr', 'rr', 'rr', 'rr', 'rr', 'rr', 'rr', '514f1b439f404f86f77090fa9edc96ce');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contracts`
+--
+
+CREATE TABLE `contracts` (
+  `club_id` int(20) NOT NULL,
+  `club_name` varchar(20) NOT NULL,
+  `fp_first_name` varchar(20) NOT NULL,
+  `fp_middle_name` varchar(20) NOT NULL,
+  `fp_last_name` varchar(20) NOT NULL,
+  `fp_player_id` int(20) NOT NULL,
+  `sp_first_name` varchar(20) NOT NULL,
+  `sp_middle_name` varchar(20) NOT NULL,
+  `sp_last_name` varchar(20) NOT NULL,
+  `designation` varchar(20) NOT NULL,
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL,
+  `contract_amount` int(20) NOT NULL,
+  `witness_one` varchar(20) NOT NULL,
+  `witness_two` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `contracts`
+--
+
+INSERT INTO `contracts` (`club_id`, `club_name`, `fp_first_name`, `fp_middle_name`, `fp_last_name`, `fp_player_id`, `sp_first_name`, `sp_middle_name`, `sp_last_name`, `designation`, `start_date`, `end_date`, `contract_amount`, `witness_one`, `witness_two`) VALUES
+(2, 'rrr', 'Syed', 'Zubaer', 'Hasan', 1, 'ff', 'ff', 'ff', 'ff', '2018-08-09', '2018-08-31', 50000, 'ae', 'ae');
 
 -- --------------------------------------------------------
 
@@ -136,6 +195,7 @@ CREATE TABLE `players` (
   `present_address` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `parmanent_address` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `membership` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `club_id` int(11) DEFAULT NULL,
   `player_sign` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -147,8 +207,8 @@ CREATE TABLE `players` (
 -- Dumping data for table `players`
 --
 
-INSERT INTO `players` (`player_id`, `f_name`, `m_name`, `l_name`, `father_name`, `mother_name`, `dob`, `image`, `present_address`, `parmanent_address`, `membership`, `player_sign`, `email`, `password`, `created_at`, `updated_at`) VALUES
-(1, 'Syed', 'Zubaer', 'Hasan', 'father name', 'mother name', '1997-08-12', 'public/images/R9P0pCoFpB1brPq1FAYK.jpg', '{\"t_houseNO\":\"420\",\"t_location\":\"lal wall\",\"t_village\":\"ansercamp\",\"t_thana\":\"mirpur\",\"t_district\":\"dhaka\",\"t_postCode\":\"1212\"}', '{\"p_houseNO\":\"420\",\"p_location\":\"lal wall\",\"p_village\":\"ansercamp\",\"p_thana\":\"mirpur\",\"p_district\":\"dhaka\",\"p_postCode\":\"1212\"}', 'Crolandian', 'public/images/9aVZiSpo63VlZj7jPVrU.png', 'zuber@nsu.com', '68cac3a785720af0f2a4a6a33b43cd77', '2018-08-28 11:12:59', NULL);
+INSERT INTO `players` (`player_id`, `f_name`, `m_name`, `l_name`, `father_name`, `mother_name`, `dob`, `image`, `present_address`, `parmanent_address`, `membership`, `club_id`, `player_sign`, `email`, `password`, `created_at`, `updated_at`) VALUES
+(1, 'Syed', 'Zubaer', 'Hasan', 'father name', 'mother name', '1997-08-12', 'public/images/R9P0pCoFpB1brPq1FAYK.jpg', '{\"t_houseNO\":\"420\",\"t_location\":\"lal wall\",\"t_village\":\"ansercamp\",\"t_thana\":\"mirpur\",\"t_district\":\"dhaka\",\"t_postCode\":\"1212\"}', '{\"p_houseNO\":\"420\",\"p_location\":\"lal wall\",\"p_village\":\"ansercamp\",\"p_thana\":\"mirpur\",\"p_district\":\"dhaka\",\"p_postCode\":\"1212\"}', 'Crolandian', 2, 'public/images/9aVZiSpo63VlZj7jPVrU.png', 'zuber@nsu.com', '4124bc0a9335c27f086f24ba207a4912', '2018-08-28 11:12:59', NULL);
 
 -- --------------------------------------------------------
 
@@ -211,6 +271,12 @@ ALTER TABLE `best_performances`
   ADD PRIMARY KEY (`perform_id`);
 
 --
+-- Indexes for table `clubs`
+--
+ALTER TABLE `clubs`
+  ADD PRIMARY KEY (`club_id`);
+
+--
 -- Indexes for table `educations`
 --
 ALTER TABLE `educations`
@@ -258,6 +324,11 @@ ALTER TABLE `users`
 ALTER TABLE `best_performances`
   MODIFY `perform_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
+-- AUTO_INCREMENT for table `clubs`
+--
+ALTER TABLE `clubs`
+  MODIFY `club_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
 -- AUTO_INCREMENT for table `educations`
 --
 ALTER TABLE `educations`
@@ -271,7 +342,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `players`
 --
 ALTER TABLE `players`
-  MODIFY `player_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `player_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `previous_histories`
 --

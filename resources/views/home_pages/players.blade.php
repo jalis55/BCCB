@@ -4,7 +4,9 @@
     <div class="well" style="background: #eeffcc">
         <div class="row" >
             @foreach($data['player_info'] as $row )
+             @if($row->club_id==null)
             <div class="col-sm-3">
+
 
                 <div class="card" style="width:120px">
                            @if($row->image==null)        
@@ -15,7 +17,7 @@
                   <div class="card-body">
                     <h4 class="card-title">{{$row->f_name}} {{$row->m_name}} {{$row->l_name}}</h4>
                     <h5><b>Age:</b>
-                        <?Php $age = floor((time() - strtotime('{{$row->dob}}')) / 31556926);
+                        <?Php $age = floor((time() - strtotime('$row->dob')) / 31556926);
                             echo $age;
                          ?>
                     </h5>
@@ -25,6 +27,7 @@
                 </div>
                 
             </div>
+            @endif
            @endforeach
         </div>
     </div>
