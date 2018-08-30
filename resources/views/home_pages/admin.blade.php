@@ -48,50 +48,28 @@
   			 </div>
 			  <ul class="list-group list-group-flush">
 			    <li class="list-group-item active">
-			    	<a href="{{url('/players')}}" class="btn btn-info btn-lg">Players</a>
+            <a href="{{url('/create-venue')}}" class="btn btn-info btn-lg">Create Venue</a>
+          </li>
+           <li class="list-group-item active">
+			    	<a href="{{url('/create-event')}}" class="btn btn-info btn-lg">Create Event</a>
 			    </li>
 			    
 			    <li class="list-group-item active">
-			    	<a href="{{url('/create-team')}}/{{$club_id}}" class="btn btn-info btn-lg">Create Team</a>
+			    	<a href="{{url('/player-performance')}}" class="btn btn-info btn-lg">Player-performance</a>
 			    </li>
 			    <li class="list-group-item active">
 			    	
-			    	<a href="" class="btn btn-info btn-lg" >Club Players</a>
+			    	<a href="{{url('match-info')}}" class="btn btn-info btn-lg" >Match Information</a>
 			    </li>
-			    <li class="list-group-item">
+			    {{-- <li class="list-group-item">
 			    	<a href="{{url('/club-logout')}}">Logout</a>
-			    </li>
+			    </li> --}}
 			  </ul>
 			</div>
 			
    			 	
    		</div>
-      <div class="col-md-6">
-            <div class="bg-success">
-             <h3>Club Teams</h3>
-              <table class="table table-bordered">
-                <thead>
-                  <tr>
-                    <th>Team id</th>
-                    <th>Action</th>
-                    
-                  </tr>
-                 </thead>
-                <tbody>
-                    
-                @foreach($teams['team'] as $row)
-                  <tr>
-                    <td>{{$row->team_id}}</td>
-                    <td><a href="{{url('add-team-players')}}/{{$row->team_id}}">add player</a></td>
 
-                  </tr>
-                @endforeach
-                </tbody>
-               </table>
-           </div>
-
-        
-      </div>
     		 
 		</div>
 		<!--Education Modal -->
@@ -100,7 +78,7 @@
 		<!--History Modal -->
 
 
-</div>
+
   
   
 

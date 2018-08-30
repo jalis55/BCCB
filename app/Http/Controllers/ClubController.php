@@ -64,7 +64,9 @@ class ClubController extends Controller
     public function club_dashboard()
     {
     	$this->auth_check();
-    	return view('home_pages.club_dashboard');
+        $data=session::get('club_id');
+        $club['team']=DB::table('teams')->where('club_id',$data)->get();
+    	return view('home_pages.club_dashboard')->with('club_id',$data)->with('teams',$club);
 
     }
      public function club_logout()
@@ -72,6 +74,116 @@ class ClubController extends Controller
         Session::flash('club_id','');
         Session::flash('message','you have logged out successfully');
         return redirect::to('club-login');
+    }
+    //team
+    public function create_team($id)
+    {
+
+        $data['player']=DB::table('contracts')->select('*')->where('club_id',$id)->get();
+        return view('home_pages.create_team')->with('club_id',$id);
+    }
+    public function team_data(Request $request)
+    {
+        $data=array();
+        $data['club_id']=$request->club_id;
+        $data['team_formation_date']=$request->team_formation_date;
+        $data['coach_id']=$request->coach_id;
+        $data['coach_name']=$request->coach_name;
+        $data['team_leader_id']=$request->team_leader_id;
+        $data['team_leader_name']=$request->team_leader_name;
+        $data['player']=$request->player_id;
+        #$data['player_name']=$request->player_name;
+
+        DB::table('teams')->insert($data);
+        return redirect::to('club-dashboard');
+
+
+    }
+    public function add_team_player($id)
+    {
+        return view('home_pages.add_team_player');
+    }
+    public function add_venue()
+    {
+        return view('home_pages.create_venue');
+
+    }
+    public function venue_data(Request $request)
+    {
+        $data=array();
+        $data['venue_id']=$request->venue_id;
+        $data['venue_name']=$request->venue_name;
+        DB::table('venues')->insert($data);
+        return redirect::to('/admin');
+    }
+    public function add_event()
+    {
+        return view('home_pages.create_event');
+    }
+    public function event_data(Request $request)
+    {
+        $data=array();
+        $data['event_id']=$request->event_id;
+        $data['location']=$request->event_name;
+        DB::table('events')->insert($data);
+        return redirect::to('admin');
+    }
+    public function player_performance()
+    {
+        return view('home_pages.player_perform');
+    }
+    public function player_performance_data(Request $request)
+    {
+       
+        $data=array();
+        $data['match_id']=$request->match_id;
+        $data['venue_id']=$request->venue_id;
+        $data['date_of_match']=$request->date_of_match;
+        $data['player_id']=$request->player_id;
+        $data['total_run']=$request->total_run;
+        $data['total_wicket']=$request->total_wicket;
+        $data['comment']=$request->comment;
+        DB::table('player_performance')->insert($data);
+        return redirect::to('admin');
+
+    }
+    public function match_info()
+    {
+        return view('home_pages.match_info');
+    }
+    public function match_info_data(Request $request)
+    {
+        $data=array();
+        $data['match_id']=$request->match_id;
+        $data['venue_id']=$request->venue_id;
+        $data['event_id']=$request->event_id;
+        $data['date_of_match']=$request->date_of_match;
+       
+        $data['man_of_match']=$request->man_of_match;
+        $data['umpires']=$request->umpires;
+        DB::table('matches')->insert($data);
+        return redirect::to('admin');
+
+    }
+    public function payment()
+    {
+        return view('home_pages.payment');
+    }
+    public function payment_data(Request $request)
+    {
+        $data=array();
+        $data['serial_id']=$request->serial_id;
+        $data['due_date']=$request->due_date;
+        $data['payment_date']=$request->payment_date;
+        $data['amount']=$request->amount;
+        DB::table('payments')->insert($data);
+        return redirect::to('payment');
+        
+    }
+
+    public function admin()
+    {
+        return view('home_pages.admin');
     }
     //contract
     public function contract($id)

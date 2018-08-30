@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 29, 2018 at 01:33 PM
+-- Generation Time: Aug 30, 2018 at 06:02 AM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 7.1.7
 
@@ -41,15 +41,6 @@ CREATE TABLE `best_performances` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `best_performances`
---
-
-INSERT INTO `best_performances` (`perform_id`, `b_clubName`, `b_opClubName`, `b_eventId`, `b_matchId`, `b_runs`, `b_wickets`, `player_id`, `created_at`, `updated_at`) VALUES
-(1, '1', 'ff', 1, 1, '2', '2', 1, NULL, NULL),
-(2, 'r', 'e', 1, 1, '12', '44', 6, NULL, NULL),
-(3, 'Crowland crows', 'Kaunia oxes', 23, 23, '197', '7', 1, NULL, NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -69,14 +60,6 @@ CREATE TABLE `clubs` (
   `president` varchar(20) NOT NULL,
   `password` varchar(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `clubs`
---
-
-INSERT INTO `clubs` (`club_id`, `club_name`, `date_of_establishment`, `club_house`, `club_location`, `club_village`, `club_thana`, `club_district`, `club_postcode`, `president`, `password`) VALUES
-(1, 'sas', '2018-08-29', 'asa', 'sasa', 'sas', 'sas', 'asa', 'sasa', 'ffff', ''),
-(2, 'rrr', '2018-08-29', 'rrr', 'rr', 'rr', 'rr', 'rr', 'rr', 'rr', '514f1b439f404f86f77090fa9edc96ce');
 
 -- --------------------------------------------------------
 
@@ -98,16 +81,10 @@ CREATE TABLE `contracts` (
   `start_date` date NOT NULL,
   `end_date` date NOT NULL,
   `contract_amount` int(20) NOT NULL,
+  `team_id` int(11) DEFAULT NULL,
   `witness_one` varchar(20) NOT NULL,
   `witness_two` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `contracts`
---
-
-INSERT INTO `contracts` (`club_id`, `club_name`, `fp_first_name`, `fp_middle_name`, `fp_last_name`, `fp_player_id`, `sp_first_name`, `sp_middle_name`, `sp_last_name`, `designation`, `start_date`, `end_date`, `contract_amount`, `witness_one`, `witness_two`) VALUES
-(2, 'rrr', 'Syed', 'Zubaer', 'Hasan', 1, 'ff', 'ff', 'ff', 'ff', '2018-08-09', '2018-08-31', 50000, 'ae', 'ae');
 
 -- --------------------------------------------------------
 
@@ -127,19 +104,48 @@ CREATE TABLE `educations` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `educations`
+-- Table structure for table `events`
 --
 
-INSERT INTO `educations` (`edu_id`, `degree_name`, `inst_name`, `board`, `year`, `result`, `player_id`, `created_at`, `updated_at`) VALUES
-(1, 'uuu', 'fdfd', 'ff', '22', '22', 1, NULL, NULL),
-(2, 'cc', 'cc', 'cc', '12', '1', 1, NULL, NULL),
-(3, 'uuu', 'fdfdf', 'uuu', '201', '1', 1, NULL, NULL),
-(4, 'uuu', 'as', 'as', '11', '11', 2, NULL, NULL),
-(5, 'uuu', 'fdfd', 'uuu', '201', '12', 4, NULL, NULL),
-(6, 'a', 'a', 'a', '44', '44', 5, NULL, NULL),
-(7, 'q', 'q', 'q', '11', '21', 6, NULL, NULL),
-(8, 'ssc', 'barisal zilla scholl,barisal', 'barisal', '2012', '5', 1, NULL, NULL);
+CREATE TABLE `events` (
+  `id` int(11) NOT NULL,
+  `event_id` int(20) NOT NULL,
+  `location` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `match`
+--
+
+CREATE TABLE `match` (
+  `match_id` int(20) NOT NULL,
+  `event_id` int(20) NOT NULL,
+  `venue_id` int(20) NOT NULL,
+  `date_man_of_match` date NOT NULL,
+  `man_of_match` varchar(20) NOT NULL,
+  `umpires` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `matches`
+--
+
+CREATE TABLE `matches` (
+  `id` int(11) NOT NULL,
+  `match_id` int(20) NOT NULL,
+  `event_id` int(20) NOT NULL,
+  `venue_id` int(20) NOT NULL,
+  `date_of_match` date NOT NULL,
+  `man_of_match` varchar(20) NOT NULL,
+  `umpires` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -153,18 +159,6 @@ CREATE TABLE `migrations` (
   `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `migrations`
---
-
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(41, '2014_10_12_000000_create_users_table', 1),
-(42, '2014_10_12_100000_create_password_resets_table', 1),
-(43, '2018_08_07_054535_create_players_table', 1),
-(44, '2018_08_07_054623_create_previous_histories_table', 1),
-(45, '2018_08_07_054707_create_best_performances_table', 1),
-(46, '2018_08_07_054733_create_educations_table', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -176,6 +170,20 @@ CREATE TABLE `password_resets` (
   `token` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payments`
+--
+
+CREATE TABLE `payments` (
+  `id` int(11) NOT NULL,
+  `serial_id` int(20) NOT NULL,
+  `due_date` date NOT NULL,
+  `payment_date` date NOT NULL,
+  `amount` int(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -203,12 +211,22 @@ CREATE TABLE `players` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `players`
+-- Table structure for table `player_performance`
 --
 
-INSERT INTO `players` (`player_id`, `f_name`, `m_name`, `l_name`, `father_name`, `mother_name`, `dob`, `image`, `present_address`, `parmanent_address`, `membership`, `club_id`, `player_sign`, `email`, `password`, `created_at`, `updated_at`) VALUES
-(1, 'Syed', 'Zubaer', 'Hasan', 'father name', 'mother name', '1997-08-12', 'public/images/R9P0pCoFpB1brPq1FAYK.jpg', '{\"t_houseNO\":\"420\",\"t_location\":\"lal wall\",\"t_village\":\"ansercamp\",\"t_thana\":\"mirpur\",\"t_district\":\"dhaka\",\"t_postCode\":\"1212\"}', '{\"p_houseNO\":\"420\",\"p_location\":\"lal wall\",\"p_village\":\"ansercamp\",\"p_thana\":\"mirpur\",\"p_district\":\"dhaka\",\"p_postCode\":\"1212\"}', 'Crolandian', 2, 'public/images/9aVZiSpo63VlZj7jPVrU.png', 'zuber@nsu.com', '4124bc0a9335c27f086f24ba207a4912', '2018-08-28 11:12:59', NULL);
+CREATE TABLE `player_performance` (
+  `id` int(11) NOT NULL,
+  `match_id` int(20) NOT NULL,
+  `venue_id` int(20) NOT NULL,
+  `date_of_match` date NOT NULL,
+  `player_id` int(11) NOT NULL,
+  `total_wicket` int(11) NOT NULL,
+  `total_run` int(11) NOT NULL,
+  `comment` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -229,20 +247,22 @@ CREATE TABLE `previous_histories` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `previous_histories`
+-- Table structure for table `teams`
 --
 
-INSERT INTO `previous_histories` (`his_id`, `p_clubName`, `from`, `to`, `total_run`, `total_wicket`, `team_leader`, `player_id`, `created_at`, `updated_at`) VALUES
-(1, 'fff', 'fff', 'fff', 121, 12, 0, 1, NULL, NULL),
-(2, 'ffff', '1222', '1223', 111, 11, 0, 1, NULL, NULL),
-(3, 'fffgg', '121', '1223', 1213, 11, 1, 1, NULL, NULL),
-(4, 'fffffff', '1122', '1133', 1213, 11111, 1, 1, NULL, NULL),
-(5, 'fffffff', '1122', '1133', 1213, 11111, 1, 1, NULL, NULL),
-(6, 'ffff', '1122', '1133', 111, 111, 1, 4, NULL, NULL),
-(7, 'a', '3', '4', 4, 4, 1, 5, NULL, NULL),
-(8, 'a', '3', '4', 4, 4, 1, 6, NULL, NULL),
-(9, 'Crowland crows', '2012', '1016', 8026, 420, 1, 1, NULL, NULL);
+CREATE TABLE `teams` (
+  `team_id` int(20) NOT NULL,
+  `club_id` int(20) DEFAULT NULL,
+  `team_formation_date` date DEFAULT NULL,
+  `team_leader_id` int(20) DEFAULT NULL,
+  `team_leader_name` varchar(20) DEFAULT NULL,
+  `coach_id` int(20) DEFAULT NULL,
+  `coach_name` varchar(20) DEFAULT NULL,
+  `player` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -259,6 +279,18 @@ CREATE TABLE `users` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `venues`
+--
+
+CREATE TABLE `venues` (
+  `id` int(11) NOT NULL,
+  `venue_id` int(20) NOT NULL,
+  `venue_name` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Indexes for dumped tables
@@ -277,10 +309,29 @@ ALTER TABLE `clubs`
   ADD PRIMARY KEY (`club_id`);
 
 --
+-- Indexes for table `contracts`
+--
+ALTER TABLE `contracts`
+  ADD PRIMARY KEY (`club_id`);
+
+--
 -- Indexes for table `educations`
 --
 ALTER TABLE `educations`
   ADD PRIMARY KEY (`edu_id`);
+
+--
+-- Indexes for table `events`
+--
+ALTER TABLE `events`
+  ADD PRIMARY KEY (`event_id`),
+  ADD UNIQUE KEY `id` (`id`);
+
+--
+-- Indexes for table `matches`
+--
+ALTER TABLE `matches`
+  ADD UNIQUE KEY `id` (`id`);
 
 --
 -- Indexes for table `migrations`
@@ -295,6 +346,12 @@ ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
 
 --
+-- Indexes for table `payments`
+--
+ALTER TABLE `payments`
+  ADD UNIQUE KEY `id` (`id`);
+
+--
 -- Indexes for table `players`
 --
 ALTER TABLE `players`
@@ -302,10 +359,22 @@ ALTER TABLE `players`
   ADD UNIQUE KEY `email` (`email`);
 
 --
+-- Indexes for table `player_performance`
+--
+ALTER TABLE `player_performance`
+  ADD UNIQUE KEY `id` (`id`);
+
+--
 -- Indexes for table `previous_histories`
 --
 ALTER TABLE `previous_histories`
   ADD PRIMARY KEY (`his_id`);
+
+--
+-- Indexes for table `teams`
+--
+ALTER TABLE `teams`
+  ADD PRIMARY KEY (`team_id`);
 
 --
 -- Indexes for table `users`
@@ -315,6 +384,12 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
+-- Indexes for table `venues`
+--
+ALTER TABLE `venues`
+  ADD UNIQUE KEY `id` (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -322,37 +397,72 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `best_performances`
 --
 ALTER TABLE `best_performances`
-  MODIFY `perform_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `perform_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `clubs`
 --
 ALTER TABLE `clubs`
-  MODIFY `club_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `club_id` int(20) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `contracts`
+--
+ALTER TABLE `contracts`
+  MODIFY `club_id` int(20) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `educations`
 --
 ALTER TABLE `educations`
-  MODIFY `edu_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `edu_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `events`
+--
+ALTER TABLE `events`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `matches`
+--
+ALTER TABLE `matches`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `payments`
+--
+ALTER TABLE `payments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `players`
 --
 ALTER TABLE `players`
-  MODIFY `player_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `player_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `player_performance`
+--
+ALTER TABLE `player_performance`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `previous_histories`
 --
 ALTER TABLE `previous_histories`
-  MODIFY `his_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `his_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `teams`
+--
+ALTER TABLE `teams`
+  MODIFY `team_id` int(20) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;COMMIT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `venues`
+--
+ALTER TABLE `venues`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
